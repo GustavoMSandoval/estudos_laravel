@@ -2,6 +2,9 @@
 
 return [
 
+    
+    Darryldecode\Cart\Facades\CartFacade::class,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

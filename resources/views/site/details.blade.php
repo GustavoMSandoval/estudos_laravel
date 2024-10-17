@@ -2,12 +2,13 @@
 @section('title', 'Details')
 @section('conteudo')
 
-<div class="row container">
+<div class="row container"> <br>
     <div class="col s12 m5">
         <img src="{{$produto->image}}" class="responsive-img" alt="">
     </div>
     <div class="col s12 m5">
-        <h1>{{$produto->title}}</h1>
+        <h4>{{$produto->title}}</h4>
+        <h4>R${{ number_format($produto->price,2, ',', '.') }}</h4>
         <p>{{$produto->description}}</p>
         <p>Postado por: {{$produto->user->firstName}}</p>
         <p>Categoria: {{$produto->category->name}}</p>

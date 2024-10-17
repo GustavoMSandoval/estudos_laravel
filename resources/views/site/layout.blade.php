@@ -12,24 +12,41 @@
 </head>
 <body>
   <ul id='dropdown1' class='dropdown-content'>
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-    <li class="divider" tabindex="-1"></li>
-    <li><a href="#!">three</a></li>
-    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+    @foreach($categoriasMenu as $categoria)
+    <li><a href="{{ route('site.categoria', $categoria->id) }}">{{$categoria->name}}</a></li>
+    @endforeach
   </ul>
 
+  <ul id='dropdown2' class='dropdown-content'>
+    
+    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ route('login.logout') }}">Sair</a></li>
+
+  </ul>
 
     <nav class="black">
         <div class="nav-wrapper container">
           <a href="#" class="brand-logo center">Logo</a>
+
           <ul id="nav-mobile" class="left">
-            <li><a href="">Home</a></li>
-            <li><a href="" class="dropdown-trigger" data-target='dropdown1'>Categorias</a></li>
+            <li><a href="{{ route('site.index') }}">Home</a></li>
+            <li><a href="#" class="dropdown-trigger" data-target='dropdown1'>Categorias <i class="material-icons right">expand_more</i></a></li>
             <li><a href="">Carrinho</a></li>
+          </ul>
+
+          @auth
+          <ul id="nav-mobile" class="right">
+
+            <li><a href="#" class="dropdown-trigger" data-target='dropdown2'>Olá {{auth()->user()->firstName}}! <i class="material-icons right">expand_more</i></a></li>
 
           </ul>
+          @else
+          <ul id="nav-mobile" class="right">
+
+            <li><a href="{{route('login.form')}}" >Fazer login<i class="material-icons right">lock</i></a></li>
+
+          </ul>
+          @endauth
         </div>
     </nav>
             
@@ -37,12 +54,21 @@
     @yield('conteudo')
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-    document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems, options);
-    });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    // var elems = document.querySelectorAll('.dropdown-trigger');
+    // var instances = M.Dropdown.init(elems, options);
+    // });
+
+      var elemDrop = document.querySelectorAll('.dropdown-trigger');
+
+      var instanceDrop = M.Dropdown.init(elemDrop, {
+            coverTrigger:false,
+            constrainWidth:false 
+      });
+      </script>
     
 
 </body>
